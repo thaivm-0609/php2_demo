@@ -1,6 +1,10 @@
 @extends('layout.main')
 @section('content')
 <table border="1">
+    <a href="{{route('create')}}">Thêm mới</a>
+    @if (isset($_SESSION['success']))
+        <p style="color:green">{{ $_SESSION['success'] }}</p>
+    @endif
     <thead>
         <th>ID</th>
         <th>Name</th>
@@ -17,8 +21,11 @@
                 <td>{{ $student->email }}</td>
                 <td>{{ $student->gender }}</td>
                 <th>
-                    <a href="">Sửa</a>
-                    <a href="">Xóa</a>
+                    <a href="{{route('edit/'.$student->id)}}">Sửa</a>
+                    <a 
+                        href="{{route('delete/'.$student->id)}}" 
+                        onclick="return confirm('Bạn có chắc chắn muốn xoá không?')"
+                    >Xóa</a>
                 </th>
             </tr>
         @endforeach

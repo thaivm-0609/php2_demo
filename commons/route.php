@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\StudentController;
 use Phroute\Phroute\RouteCollector;
 
 $url = !isset($_GET['url']) ? "/" : $_GET['url'];
@@ -15,9 +16,15 @@ $router->filter('auth', function(){
 
 
 // bắt đầu định nghĩa ra các đường dẫn
-$router->get('/', function(){
-    return "trang chủ";
-});
+// $router->get('/', function(){
+//     return "trang chủ";
+// });
+$router->get('/',[StudentController::class,'getStudent']);
+$router->get('create', [StudentController::class,'create']); //trả về giao diện form tạo mới
+$router->post('store', [StudentController::class,'store']); //thực hiện việc lưu
+$router->get('edit/{id}', [StudentController::class,'edit']); //trả về giao diện form sửa
+$router->post('update/{id}', [StudentController::class,'update']); //thực hiện việc lưu chỉnh sửa
+$router->any('delete/{id}', [StudentController::class,'delete']);
 # NB. You can cache the return value from $router->getData() so you don't have to create the routes each request - massive speed gains
 $dispatcher = new Phroute\Phroute\Dispatcher($router->getData());
 

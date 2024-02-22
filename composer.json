@@ -1,0 +1,9 @@
+{
+    "name": "admin/thaivm2_tutor_php2",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "require": {}
+}
